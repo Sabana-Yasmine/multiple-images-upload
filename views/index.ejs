@@ -7,20 +7,23 @@
     <title>multiple image uploading</title>
 </head>
 <body>
-    <h2>uploading multiple images using multer</h2>
-    <form action="/",enctype="mutipart/form-data" mehtod="post">
-        <label>please select your image</label>
-        <input type="file" name="files" multiple>
-        <input type ="submit" value="uploads">
-    </form>
-    <hr>
-    <h1>image_preview</h1>
-    <ul>
-        <%data.forEach(img=>{%>
-           <li><%=img.filename %></li> 
-            <img src="./upload/<%=img.filename%>">
-        <%});%>
-    </ul>
+    <%if(data.length == 0){%>
+        <h2>Image Upload</h2>
+        <form method = "post" action = "/uploading_images" enctype = "multipart/form-data">
+            <label>please select your image</label>
+            <input type = "file" name = "file" multiple>
+            <input type = "submit" value ="upload">
+        </form>
+
+        <hr>
+        <h2>Image_preview</h2>
+        <ul>
+            <%}%>
+            <%data.forEach(img=>{%>
+                <li> <%=img.filename%> </li>
+                <img src = "http://localhost:5584/<%=img.filename%>">
+            <%})%>
+            </ul>
 
 </body>
 
