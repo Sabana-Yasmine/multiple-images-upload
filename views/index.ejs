@@ -9,10 +9,19 @@
 <body>
     <h2>uploading multiple images using multer</h2>
     <form action="/",enctype="mutipart/form-data" mehtod="post">
-        <input type="file" name="multi_files" accept='.images/*' multiple="multiple">
+        <label>please select your image</label>
+        <input type="file" name="files" multiple>
         <input type ="submit" value="uploads">
-    
     </form>
+    <hr>
+    <h1>image_preview</h1>
+    <ul>
+        <%data.forEach(img=>{%>
+           <li><%=img.filename %></li> 
+            <img src="./upload/<%=img.filename%>">
+        <%});%>
+    </ul>
+
 </body>
 
 </html>

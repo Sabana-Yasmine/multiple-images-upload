@@ -3,12 +3,16 @@ const app = express();
 const multer = require("multer");
 const cors = require("cors");
 app.use(cors());
+const ejs = require("ejs");
 
-app.use(express.static('uploads'))
+//app.use(express.static('views/upload'))
+
+app.use(express.static("upload"));
+app.set("view engine","ejs");
 
 const storage = multer.diskStorage({
     destination : (req,file,cb)=>{
-        cb(null,"uploads")
+        cb(null,"views/upload")
     },
     filename : (req,file,cb)=>{
         cb(null,Date.now()+"."+file.originalname)
@@ -37,7 +41,10 @@ app.post("/uploading_images", async(req,res)=>{
             }
             else
             {
-                res.json({ststus:"success",data : req.files})
+                //res.json({status:"success",data : req.files})
+               const data = req.files
+               res.render("index",{data:data})
+                
             }
                  
             
@@ -48,11 +55,10 @@ app.post("/uploading_images", async(req,res)=>{
 })
 
 app.get("/",(req,res)=>{
-    console.log("get data");
-    res.sendFile(__dirname + "/index.html")
+    res.render("index")
 })
 
-app.listen(4040,()=>{
+app.listen(578,()=>{
     console.log("server created")
 })
 
